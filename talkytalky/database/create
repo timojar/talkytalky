@@ -1,0 +1,115 @@
+
+
+Create table kayttaja
+
+(
+id integer NOT NULL primary key AUTO_INCREMENT,
+
+enabled tinyint NOT NULL,
+
+
+etunimi varchar(50) NOT NULL,
+
+
+sukunimi varchar(150) NOT NULL,
+
+
+email varchar(200) NOT NULL,
+
+
+salasana varchar(300) NOT NULL )
+
+DEFAULT CHARSET=utf8;
+
+
+create table kayttajaToken
+
+(
+id integer NOT NULL primary key AUTO_INCREMENT,
+
+kayttajaId integer not null,
+tokenString varchar (500) not null,
+foreign key(kayttajaId) references kayttaja(id))
+
+DEFAULT CHARSET=utf8;
+
+
+create table valtuus
+(
+id integer NOT NULL AUTO_INCREMENT primary key  ,
+
+
+rooli  varchar(30) NOT NULL)
+DEFAULT CHARSET=utf8;
+
+
+
+create table kayttajaValtuus
+
+(
+id int NOT NULL AUTO_INCREMENT primary key,
+kayttajaId int not null,
+valtuusId int not null,
+foreign key(kayttajaId) references kayttaja(id),
+foreign key(valtuusId) references valtuus(id))
+DEFAULT CHARSET=utf8;
+
+
+
+create table keskustelu
+(
+id integer NOT NULL AUTO_INCREMENT primary key  ,
+pvm date not null,
+updatedPvm timestamp not null
+
+)
+DEFAULT CHARSET=utf8;
+
+create table keskusteluToken
+
+(
+id integer NOT NULL primary key AUTO_INCREMENT,
+
+keksusteluId integer not null,
+tokenString varchar (500) not null,
+email varchar (500) not null,
+foreign key(keksusteluId) references keskustelu(id))
+
+DEFAULT CHARSET=utf8;
+
+
+
+create table kayttajaKeskustelu
+
+(
+
+kayttajaId int not null primary key,
+kayttajavaltuusId int not null ,
+keskusteluId int not null,
+foreign key(kayttajaId) references kayttaja(id),
+foreign key(kayttajavaltuusId) references kayttajaValtuus(id),
+foreign key(keskusteluId) references keskustelu(id))
+DEFAULT CHARSET=utf8;
+
+
+
+create table viesti
+
+(
+
+id integer NOT NULL AUTO_INCREMENT primary key,
+kayttajaId int not null,
+keskusteluId int not null,
+foreign key(keskusteluId) references keskustelu(id),
+foreign key(kayttajaId) references kayttaja(id)
+
+)
+DEFAULT CHARSET=utf8;
+
+
+
+
+
+
+
+0
