@@ -56,7 +56,7 @@ public JdbcTemplate getJdbcTemplate() {
 	public int luoKeskustelu(Keskustelu k){
 		
 		
-		String sql="insert into keskustelu (nimi, pvm, updatedPvm) values (?, ?, ?)";	
+		String sql="insert into keskustelu (nimi, pvm, updatedPvm, aloittajaId) values (?, ?,?,?)";	
 		
 		
 		KeyHolder idHolder = new GeneratedKeyHolder();
@@ -70,6 +70,7 @@ public JdbcTemplate getJdbcTemplate() {
 				ps.setString(1, k.getNimi());
 				ps.setTimestamp(2,new Timestamp(System.currentTimeMillis()));
 				ps.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+				ps.setInt(4, k.getAloittajaId());
 							
 				return ps;
 			}
@@ -105,7 +106,7 @@ public JdbcTemplate getJdbcTemplate() {
 		
 		
 
-		String sql = "select keskusteluId, kayttajaValtuusId, kayttajaid, nimi, pvm, updatedPvm  from kayttajakeskustelu join keskustelu on kayttajakeskustelu.keskusteluid=keskustelu.id join kayttaja on kayttajakeskustelu.kayttajaId=kayttaja.id where kayttajaId=?";
+		String sql = "select keskusteluId, kayttajaValtuusId, kayttajaid, nimi, pvm, updatedPvm, aloittajaId  from kayttajakeskustelu join keskustelu on kayttajakeskustelu.keskusteluid=keskustelu.id join kayttaja on kayttajakeskustelu.kayttajaId=kayttaja.id where kayttajaId=?";
 		Object[] parametrit = new Object[] { kayttajaId };
 		RowMapper<KayttajaKeskustelu> mapper = new KayttajaKeskusteluRowMapper();
 

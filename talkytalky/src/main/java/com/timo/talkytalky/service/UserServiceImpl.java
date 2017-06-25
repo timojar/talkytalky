@@ -1,6 +1,7 @@
 package com.timo.talkytalky.service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -95,6 +96,8 @@ public void luoKeskustelu(Keskustelu k, KayttajaValtuus kv){
 	
 	KayttajaKeskustelu kk= new KayttajaKeskustelu();
 	
+	int aloittajaId=kv.getKayttajaId();
+	k.setAloittajaId(aloittajaId);
 	int keskusteluId= kDao.luoKeskustelu(k);
 	
 	int valtuusId=2;
@@ -119,9 +122,20 @@ public List<KayttajaKeskustelu> haeKeskustelut(int kayttajaId){
 	
 	
 	List<KayttajaKeskustelu> kkList=kDao.haeKeskustelut(kayttajaId);
+	List<KayttajaKeskustelu> keskustelut=new ArrayList<KayttajaKeskustelu>();
+	for(int i=0; i<kkList.size(); i++){
+	
+	int id=kkList.get(i).getKeskustelu().getAloittajaId();
+	Kayttaja aloittaja=haeKayttajaTiedot(id);
+	KayttajaKeskustelu k=kkList.get(i);
+	k.setAloittaja(aloittaja);
+	keskustelut.add(k);
+		
+		
+	}
 	
 	
-	return kkList;
+	return keskustelut;
 	
 }
 

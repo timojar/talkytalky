@@ -9,9 +9,17 @@ private String nimi;
 private Timestamp pvm;
 private String pvmStr;
 private Timestamp upDatedPvm;
+private int aloittajaId;
 
 
 
+
+public int getAloittajaId() {
+	return aloittajaId;
+}
+public void setAloittajaId(int aloittajaId) {
+	this.aloittajaId = aloittajaId;
+}
 public String getPvmStr() {
 	return pvmStr;
 }

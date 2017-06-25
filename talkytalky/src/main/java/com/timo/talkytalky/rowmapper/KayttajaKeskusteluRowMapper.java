@@ -35,6 +35,7 @@ public class KayttajaKeskusteluRowMapper implements RowMapper<KayttajaKeskustelu
 		keskustelu.setNimi(rs.getString("nimi"));
 		keskustelu.setPvm(rs.getTimestamp("pvm"));
 		keskustelu.setUpDatedPvm(rs.getTimestamp("updatedPvm"));
+		keskustelu.setAloittajaId(rs.getInt("aloittajaId"));
 		Timestamp pvm=keskustelu.getPvm();
 		System.out.println(rs.getTimestamp("updatedPvm")+" testissä");
 		System.out.println("testissä 3 "+keskustelu.getPvm());

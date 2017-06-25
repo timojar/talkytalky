@@ -7,6 +7,7 @@ private int keskusteluId;
 private int kayttajaValtuusId;
 private String nimi;
 private Kayttaja kayttaja;
+private Kayttaja aloittaja;
 
 private Keskustelu keskustelu;
 
@@ -15,6 +16,12 @@ private Keskustelu keskustelu;
 
 
 
+public Kayttaja getAloittaja() {
+	return aloittaja;
+}
+public void setAloittaja(Kayttaja aloittaja) {
+	this.aloittaja = aloittaja;
+}
 public Keskustelu getKeskustelu() {
 	return keskustelu;
 }
